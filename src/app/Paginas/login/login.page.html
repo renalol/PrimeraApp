@@ -1,0 +1,32 @@
+<ion-content class="login-container" [fullscreen]="true">
+  <img src="assets/imgs/Logo.class.png" alt="Class Minder" class="login-logo" />
+  <h2 class="login-title" style="font-weight: bold">Inicio de Sesión</h2>
+
+  <ion-item class="login-item">
+    <ion-label position="floating">Nombre de usuario</ion-label>
+    <ion-input type="text" [clearInput]="true" [(ngModel)]="usuario"></ion-input>
+  </ion-item>
+
+  <ion-item class="login-item">
+    <ion-label position="floating">Contraseña</ion-label>
+    <ion-input type="password" [clearInput]="true" [(ngModel)]="contrasena"></ion-input>
+  </ion-item>
+
+  <ion-button class="botonlogin" expand="block" fill="clear" (click)="iniciarSesion()">
+    Iniciar sesión
+  </ion-button>
+
+  <ion-button class="botonlogin" expand="block" fill="clear" routerLink="/registro">
+    No te haz registrado aun?
+  </ion-button>
+
+  <div class="login-links">
+    <a (click)="navigateToReset()">¿Has olvidado la contraseña?</a>
+  </div>
+
+  <ion-footer>
+    <ion-toolbar class="footer">
+      <ion-title id="tPrincipal" style="position: relative">Duocuc: Sede Alameda</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

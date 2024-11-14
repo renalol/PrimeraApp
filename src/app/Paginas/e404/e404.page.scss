@@ -1,0 +1,31 @@
+ion-toolbar{
+  --ion-toolbar-background: rgb(75, 51, 169);
+  --ion-title-color: white;
+
+}
+ion-content{  
+  --ion-background-color: #faf9f8;
+}
+ion-button {
+  --border-radius: 5px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  margin: 0 auto;
+  color: #000000;
+
+}
+.error-title{
+  text-align: center;
+  margin-top: 20%;
+  font-size: 20px;
+  color: #17202a;
+}
+.food-placeholder {
+  height: 100px;
+  background-color: #ffffff;
+  border-radius: 8px 8px 0 0;
+
+}
+.ion-padding{
+  --background: url('https://i.pinimg.com/564x/aa/5b/b9/aa5bb98c244bb0d482b23177ba383cc3.jpg');
+}

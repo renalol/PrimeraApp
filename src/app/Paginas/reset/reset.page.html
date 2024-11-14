@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true" class="content-reset">
+  <img src="assets/imgs/logo-hrztl.jpeg" alt="Class Minder" class="login-logo" />
+  <h2 class="reset-title" style="font-weight: bold">
+    Restablecer credenciales
+  </h2>
+
+  <ion-item class="reset-item">
+    <ion-label position="floating">Nuevo Usuario</ion-label>
+    <ion-input type="text" [(ngModel)]="usuario"></ion-input>
+  </ion-item>
+
+  <ion-item class="reset-item">
+    <ion-label position="floating">Nueva Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="contrasena"></ion-input>
+  </ion-item>
+
+  <ion-button class="boton-reset" expand="block" fill="clear" (click)="resetCredentials()"
+    >Restablecer</ion-button>
+
+    <ion-button class="boton-reset" expand="block" fill="clear" routerLink="/">Volver a la página principal</ion-button>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="footer">
+    <ion-title id="tPrincipal" style="position: relative"
+      >Duocuc: Sede Alameda</ion-title
+    >
+  </ion-toolbar>
+</ion-footer>

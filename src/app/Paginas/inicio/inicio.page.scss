@@ -1,0 +1,210 @@
+/* Estilo General para Todas las Cards */
+.custom-card {
+  border-radius: 30px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  color: #333333;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid #d1d1d1;
+}
+
+ion-content {
+  --padding-top: -15%;
+  --padding-bottom: 0%;
+}
+
+.custom-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Títulos de las Cards */
+.custom-card ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #6a0dad;
+  text-align: center;
+}
+
+/* Botones dentro de las Cards */
+.custom-card ion-button {
+  --background: #6a0dad;
+  --background-activated: #5b009f;
+  color: #ffffff;
+  border-radius: 15px;
+}
+
+/* Botón de expandir específico */
+.custom-card ion-button[fill="clear"] {
+  --background: #6a0dad;
+  --background-activated: #5b009f;
+  --background-hover: #6a0dad;
+  --color: white;
+  margin: 0;
+  height: 30px;
+  width: 40px;
+}
+
+.custom-card ion-button[fill="clear"] ion-icon {
+  color: white;
+  height: 50px;
+}
+
+/* Iconos generales */
+.custom-card ion-icon {
+  color: #6a0dad;
+}
+
+/* Elementos de Input dentro de las Cards */
+.custom-card ion-item {
+  --background: #f5f5f5;
+  color: #333333;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Segmentos dentro de las Cards */
+.custom-card ion-segment-button {
+  --background: #f0f0f0;
+  --background-activated: #6a0dad;
+  --background-checked: #6a0dad;
+  --color: #333333;
+  --color-checked: #ffffff;
+  border-radius: 20px;
+}
+
+/* Texto y Subtítulos */
+.custom-card ion-card-subtitle {
+  color: #6a0dad;
+  font-size: 0.9rem;
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* Card de ClassMinder (logo y bienvenida) */
+.animated-card {
+  border-radius: 30px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 15px;
+  border: 2px solid #d1d1d1;
+}
+
+.animated-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.animated-card ion-card-title {
+  color: #6a0dad;
+}
+
+.animated-card ion-card-subtitle {
+  color: #6a0dad;
+  opacity: 0.8;
+}
+
+/* Estilos para el calendario*/ 
+ion-datetime {
+  --background: #ffffff;
+  --text-color: #333333;
+  border-radius: 15px;
+}
+
+/* Estilos para las listas de notas y agenda */
+ion-list {
+  background: #ffffff !important;
+  padding: 10px;
+}
+
+ion-item {
+  --background: #ffffff;
+  --border-color: #e0e0e0;
+  margin-bottom: 8px;
+  border-radius: 10px;
+}
+
+ion-item ion-label {
+  color: #333333 !important;
+}
+
+ion-item ion-label h2 {
+  color: #6a0dad;
+  font-weight: bold;
+}
+
+ion-item ion-label h3 {
+  color: #666666;
+}
+
+ion-item ion-label p {
+  color: #333333;
+}
+
+/* Header y Footer */
+ion-header {
+  background: linear-gradient(135deg, #a17fe0, #8366cc);
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding: 12px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+ion-toolbar {
+  --background: transparent;
+}
+
+.header-title {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+ion-button {
+  color: white;
+}
+
+ion-footer {
+  background: linear-gradient(135deg, #a17fe0, #8366cc);
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  padding: 12px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+ion-footer ion-toolbar {
+  --background: transparent;
+}
+
+ion-tab-bar {
+  --background: transparent;
+  --border: none;
+  padding: 10px 0;
+}
+
+ion-tab-button {
+  --color: white;
+  --color-selected: white;
+}
+
+ion-tab-button ion-icon {
+  font-size: 24px;
+  color: white;
+}
+
+/* Ajustes adicionales para mejorar la visibilidad */
+.segment-content {
+  margin-top: 15px;
+}
+.fondoinicio {
+  --background: url('https://i.pinimg.com/564x/aa/5b/b9/aa5bb98c244bb0d482b23177ba383cc3.jpg');
+}
+
+

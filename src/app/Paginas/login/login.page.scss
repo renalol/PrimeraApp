@@ -1,0 +1,73 @@
+body {
+  font-family: Courier New, monospace;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  --ion-background-color: #faf9f8;
+  --background: url('https://i.pinimg.com/564x/aa/5b/b9/aa5bb98c244bb0d482b23177ba383cc3.jpg');
+
+}
+
+ion-item {
+  --border-radius: 5px;
+}
+
+ion-button {
+  --border-radius: 5px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  margin: 0 auto;
+  color: #000000;
+
+}
+
+.login-logo {
+  width: 65%;
+  height: auto;
+  margin: 30px 80px;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 20%;
+  font-size: 40px;
+  color: #17202a;
+}
+
+.login-links {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.login-links a {
+  color: #333;
+}
+
+.login-item {
+  max-width: 85%;
+  margin: 0px 0px 15px 30px;
+}
+
+.login-button {
+  padding: 15px 30px;
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto;
+  font-size: 1.2rem;
+}
+
+.botonlogin {
+  opacity: 1;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}

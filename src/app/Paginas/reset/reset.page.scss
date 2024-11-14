@@ -1,0 +1,57 @@
+.content-reset {
+    --ion-background-color: #ffffff;
+    display: flex;
+    --background: url('https://i.pinimg.com/564x/aa/5b/b9/aa5bb98c244bb0d482b23177ba383cc3.jpg');
+
+}
+
+.reset-title {
+    text-align: center;
+    margin-bottom: 20%;
+    font-size: 40px;
+    color: #17202a;
+}
+.login-logo {
+    width: 70%;
+    height: auto;
+    margin: 20% 12%;
+
+}
+ion-button {
+    --border-radius: 5px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    margin: 0 auto;
+    color: #000000;
+}
+
+.boton-reset {
+    padding: 15px 30px;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    font-size: 1.2rem;
+  }
+
+.header-reset {
+    background-color: black;
+}
+
+.reset-item {
+    max-width: 85%;
+    margin: 0px 0px 15px 30px;
+}
+
+ion-item {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --border-radius: 5px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
