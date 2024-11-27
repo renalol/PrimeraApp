@@ -2,92 +2,55 @@
   <ion-toolbar>
     <ion-title class="header-title">Bienvenido {{usuario}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="notifications-outline"></ion-icon>
-      </ion-button>
+      <ion-button></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content [fullscreen]="true" class="fondoinicio">
-  <div style="margin-top: 50px;">
+<ion-content [scrollEvents]="true" [fullscreen]="true" class="fondoinicio">
+  <div style="margin-top: 30%;">
     <ion-grid>
       <ion-row>
         <ion-col size-lg="3" size="3" size-m="0"></ion-col>
         <ion-col size-lg="6" size="12">
-          
-          <ion-card class="animated-card" style="border: 4px solid hsla(275, 99%, 48%, 0.622);">
-            <img alt="ClassMinder logo" src="assets/imgs/logo-hrztl.jpeg" />
+
+          <!-- Card de Buscar Palabras Relacionadas -->
+          <ion-card style="border: 4px solid hsla(275, 99%, 48%, 0.622);" class="custom-card">
             <ion-card-header>
-              <ion-card-title>ClassMinder</ion-card-title>
-              <ion-card-subtitle>Bienvenido A</ion-card-subtitle>
+              <ion-card-title>Buscar Palabras Relacionadas</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              ClassMinder es una aplicación diseñada para facilitar tu vida académica.
+              <ion-item>
+                <ion-label position="floating">Escribe una palabra</ion-label>
+                <ion-input [(ngModel)]="palabraBuscada" (ionInput)="buscarPalabras()"></ion-input>
+              </ion-item>
+
+              <ion-list *ngIf="palabrasCargando">
+                <ion-item>
+                  <ion-label>Buscando palabras...</ion-label>
+                  <ion-spinner></ion-spinner>
+                </ion-item>
+              </ion-list>
+
+              <ion-list *ngIf="palabrasRelacionadas.length > 0">
+                <ion-item *ngFor="let palabra of palabrasRelacionadas">
+                  {{ palabra.word }}
+                </ion-item>
+              </ion-list>
+
+              <div *ngIf="palabrasRelacionadas.length === 0 && palabraBuscada && !palabrasCargando">
+                No se encontraron palabras relacionadas.
+              </div>
             </ion-card-content>
           </ion-card>
-          
-          <!-- Card de Consulta -->
-          <ion-card  style="border: 4px solid hsla(275, 99%, 48%, 0.622);" class="custom-card" [class.expanded]="isExpandedMap['consulta']">
+
+          <!-- Card de Agendar Actividad -->
+          <ion-card style="border: 4px solid hsla(275, 99%, 48%, 0.622);" class="custom-card" [class.expanded]="isExpandedMap['agendar']">
             <ion-card-header>
               <ion-grid>
                 <ion-row class="ion-align-items-center">
                   <ion-col>
-                    <ion-card-title>Consulta</ion-card-title>
-                  </ion-col>
-                  <ion-col size="auto">
-                    <ion-button fill="clear" size="small" (click)="toggleExpand('consulta')">
-                      <ion-icon [name]="isExpandedMap['consulta'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
-                    </ion-button>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-card-header>
-
-            <ion-card-content *ngIf="isExpandedMap['consulta']" class="card-content-animation">
-              <ion-grid>
-                <ion-row>
-                  <ion-col size="12">
-                    <ion-item>
-                      <ion-label position="floating">Correo Electrónico</ion-label>
-                      <ion-input type="email" [(ngModel)]="consulta.email"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                      <ion-label position="floating">Descripción</ion-label>
-                      <ion-textarea [(ngModel)]="consulta.description"></ion-textarea>
-                    </ion-item>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-
-              <ion-grid>
-                <ion-row>
-                  <ion-col size="12">
-                    <ion-button expand="block" (click)="sendConsulta()">
-                      <ion-icon name="send-outline"></ion-icon> Enviar
-                    </ion-button>
-                    <div *ngIf="consulta.isSent" class="ion-text-center ion-padding success-message">
-                      Consulta enviada exitosamente
-                    </div>
-                    <ion-card-content *ngIf="consulta.isSent">
-                      <ion-button expand="block" (click)="resetConsulta()">
-                        <ion-icon name="add-outline"></ion-icon> Generar nueva consulta
-                      </ion-button>
-                    </ion-card-content>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-card-content>
-          </ion-card>
-
-          <!-- Card de Agendar con Vista de Agenda -->
-          <ion-card  style="border: 4px solid hsla(275, 99%, 48%, 0.622);" class="custom-card" [class.expanded]="isExpandedMap['agendar']">
-            <ion-card-header>
-              <ion-grid>
-                <ion-row class="ion-align-items-center">
-                  <ion-col>
-                    <ion-card-title>Agendar Actividad</ion-card-title>
+                    <ion-card-title>Agendar Alerta</ion-card-title>
                   </ion-col>
                   <ion-col size="auto">
                     <ion-button fill="clear" (click)="toggleExpand('agendar')" size="small">
@@ -97,60 +60,120 @@
                 </ion-row>
               </ion-grid>
             </ion-card-header>
-          
+
             <ion-card-content *ngIf="isExpandedMap['agendar']" class="card-content-animation">
-              <!-- Segmento para alternar entre agendar y ver agenda -->
               <ion-segment [(ngModel)]="selectedSegment" mode="ios">
                 <ion-segment-button value="agendar">
                   <ion-label>Agendar</ion-label>
                 </ion-segment-button>
                 <ion-segment-button value="agenda">
-                  <ion-label>Ver Agenda</ion-label>
+                  <ion-label>Ver Alertas</ion-label>
                 </ion-segment-button>
               </ion-segment>
 
-              <!-- Formulario de Agendar -->
               <div *ngIf="selectedSegment === 'agendar'" class="segment-content">
-                <ion-card>
-                  <ion-card-header>
-                    <ion-card-title>Selecciona la fecha/hora</ion-card-title>
-                  </ion-card-header>
-                  <ion-card-content>
-                    <ion-datetime locale="en-GB-u-hc-h12" [(ngModel)]="nuevaActividad.fecha"></ion-datetime>
-                  </ion-card-content>
-                </ion-card>
-
                 <ion-item>
-                  <ion-label position="floating">Ingresar Asignatura</ion-label>
-                  <ion-input type="text" [(ngModel)]="nuevaActividad.asignatura"></ion-input>
+                  <ion-label position="floating">Fecha</ion-label>
+                  <ion-datetime locale="en-GB-u-hc-h12" [(ngModel)]="nuevaAlerta.fecha"></ion-datetime>
                 </ion-item>
-
                 <ion-item>
-                  <ion-label position="floating">Descripción Actividad</ion-label>
-                  <ion-textarea [(ngModel)]="nuevaActividad.descripcion"></ion-textarea>
+                  <ion-label position="floating">Asignatura</ion-label>
+                  <ion-input type="text" [(ngModel)]="nuevaAlerta.asignatura"></ion-input>
                 </ion-item>
-
-                <ion-button expand="block" (click)="agregarActividad()">
+                <ion-item>
+                  <ion-label position="floating">Descripción</ion-label>
+                  <ion-textarea [(ngModel)]="nuevaAlerta.descripcion"></ion-textarea>
+                </ion-item>
+                <ion-button expand="block" (click)="agregarAlerta()">
                   <ion-icon name="calendar-outline"></ion-icon> Agendar
                 </ion-button>
               </div>
 
-              <!-- Vista de Agenda -->
               <div *ngIf="selectedSegment === 'agenda'" class="segment-content">
                 <ion-list>
-                  <ion-item *ngFor="let actividad of actividadesPendientes; let i = index">
+                  <ion-item *ngFor="let alerta of alertasPendientes; let i = index">
                     <ion-label>
-                      <h2>{{actividad.asignatura}}</h2>
-                      <p>{{actividad.descripcion}}</p>
-                      <p>{{actividad.fecha | date:'short'}}</p>
+                      <h2>{{ alerta.asignatura }}</h2>
+                      <p>{{ alerta.descripcion }}</p>
+                      <p>{{ alerta.fecha | date:'short' }}</p>
                     </ion-label>
-                    <ion-button slot="end" fill="clear" color="danger" (click)="eliminarActividad(i)">
+                    <ion-button slot="end" fill="clear" color="danger" (click)="eliminarAlerta(i)">
                       <ion-icon name="trash-outline"></ion-icon>
                     </ion-button>
                   </ion-item>
-                  <ion-item *ngIf="actividadesPendientes.length === 0">
+                  <ion-item *ngIf="alertasPendientes.length === 0">
+                    <ion-label class="ion-text-center">No hay alertas pendientes</ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-card-content>
+          </ion-card>
+
+          <!-- Card de Agendar Notas -->
+          <ion-card style="border: 4px solid hsla(275, 99%, 48%, 0.622);" class="custom-card" [class.expanded]="isExpandedMap['notasAgendadas']">
+            <ion-card-header>
+              <ion-grid>
+                <ion-row class="ion-align-items-center">
+                  <ion-col>
+                    <ion-card-title>Agendar Notas</ion-card-title>
+                  </ion-col>
+                  <ion-col size="auto">
+                    <ion-button fill="clear" size="small" (click)="toggleExpand('notasAgendadas')">
+                      <ion-icon [name]="isExpandedMap['notasAgendadas'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-header>
+
+            <ion-card-content *ngIf="isExpandedMap['notasAgendadas']" class="card-content-animation">
+              <ion-segment [(ngModel)]="selectedNotesAgendaSegment" mode="ios">
+                <ion-segment-button value="agregar">
+                  <ion-label>Nueva Nota Agendada</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="ver">
+                  <ion-label>Mis Notas Agendadas</ion-label>
+                </ion-segment-button>
+              </ion-segment>
+
+              <!-- Formulario para agregar nuevas notas agendadas -->
+              <div *ngIf="selectedNotesAgendaSegment === 'agregar'" class="segment-content">
+                <ion-item>
+                  <ion-label position="floating">Título</ion-label>
+                  <ion-input type="text" [(ngModel)]="nuevaNotaAgendada.titulo"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Fecha</ion-label>
+                  <ion-datetime [(ngModel)]="nuevaNotaAgendada.fecha"></ion-datetime>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Contenido</ion-label>
+                  <ion-textarea [(ngModel)]="nuevaNotaAgendada.contenido"></ion-textarea>
+                </ion-item>
+
+                <ion-button expand="block" (click)="guardarNotaAgendada()">
+                  <ion-icon name="save-outline"></ion-icon> Guardar Nota Agendada
+                </ion-button>
+              </div>
+
+              <!-- Lista de notas agendadas -->
+              <div *ngIf="selectedNotesAgendaSegment === 'ver'" class="segment-content">
+                <ion-list>
+                  <ion-item *ngFor="let nota of notasAgendadas; let i = index">
+                    <ion-label>
+                      <h2>{{nota.titulo}}</h2>
+                      <p>{{nota.fecha | date:'short'}}</p>
+                      <p>{{nota.contenido}}</p>
+                    </ion-label>
+                    <ion-button slot="end" fill="clear" color="danger" (click)="eliminarNotaAgendada(i)">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </ion-button>
+                  </ion-item>
+                  <ion-item *ngIf="notasAgendadas.length === 0">
                     <ion-label class="ion-text-center">
-                      No hay actividades pendientes
+                      No hay notas agendadas.
                     </ion-label>
                   </ion-item>
                 </ion-list>
@@ -158,84 +181,30 @@
             </ion-card-content>
           </ion-card>
 
-          <!-- Card de Notas -->
-          <ion-card style="border: 4px solid hsla(275, 99%, 48%, 0.622);" class="custom-card" [class.expanded]="isExpandedMap['notas']">
+          <!-- Card de Mandar Correo -->
+          <ion-card style="border: 4px solid hsla(275, 99%, 48%, 0.622);" class="custom-card">
             <ion-card-header>
-              <ion-grid>
-                <ion-row class="ion-align-items-center">
-                  <ion-col>
-                    <ion-card-title>Cuaderno Digital</ion-card-title>
-                  </ion-col>
-                  <ion-col size="auto">
-                    <ion-button fill="clear" size="small" (click)="toggleExpand('notas')">
-                      <ion-icon [name]="isExpandedMap['notas'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
-                    </ion-button>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
+              <ion-card-title>Mandar Correo</ion-card-title>
             </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <ion-label position="floating">Destinatario</ion-label>
+                <ion-input [(ngModel)]="correo.destinatario" type="email"></ion-input>
+              </ion-item>
 
-            <ion-card-content *ngIf="isExpandedMap['notas']" class="card-content-animation">
-              <!-- Segmento para alternar entre crear y ver notas -->
-              <ion-segment [(ngModel)]="selectedNotesSegment" mode="ios">
-                <ion-segment-button value="crear">
-                  <ion-label>Nueva Nota</ion-label>
-                </ion-segment-button>
-                <ion-segment-button value="ver">
-                  <ion-label>Mis Notas</ion-label>
-                </ion-segment-button>
-              </ion-segment>
+              <ion-item>
+                <ion-label position="floating">Asunto</ion-label>
+                <ion-input [(ngModel)]="correo.asunto" type="text"></ion-input>
+              </ion-item>
 
-              <!-- Formulario de Nueva Nota -->
-              <div *ngIf="selectedNotesSegment === 'crear'" class="segment-content">
-                <ion-item>
-                  <ion-label position="floating">Título</ion-label>
-                  <ion-input type="text" [(ngModel)]="nuevaNota.titulo"></ion-input>
-                </ion-item>
+              <ion-item>
+                <ion-label position="floating">Contenido</ion-label>
+                <ion-textarea [(ngModel)]="correo.contenido"></ion-textarea>
+              </ion-item>
 
-                <ion-item>
-                  <ion-label position="floating">Asignatura</ion-label>
-                  <ion-input type="text" [(ngModel)]="nuevaNota.asignatura"></ion-input>
-                </ion-item>
-
-                <ion-item>
-                  <ion-label position="floating">Contenido</ion-label>
-                  <ion-textarea
-                    [(ngModel)]="nuevaNota.contenido"
-                    rows="6"
-                    placeholder="Escribe tu nota aquí..."
-                  ></ion-textarea>
-                </ion-item>
-
-                <ion-button expand="block" class="ion-margin-top" (click)="guardarNota()">
-                  <ion-icon name="save-outline"></ion-icon>
-                  Guardar Nota
-                </ion-button>
-              </div>
-
-              <!-- Vista de Notas Guardadas -->
-              <div *ngIf="selectedNotesSegment === 'ver'" class="segment-content">
-                <ion-list>
-                  <ion-item-sliding *ngFor="let nota of notas; let i = index">
-                    <ion-item>
-                      <ion-label>
-                        <h2>{{nota.titulo}}</h2>
-                        <h3>{{nota.asignatura}}</h3>
-                        <p>{{nota.contenido}}</p>
-                        <small>{{nota.fecha | date:'short'}}</small>
-                      </ion-label>
-                      <ion-button class='borrar' slot="end" fill="clear" color="danger" (click)="eliminarNota(i)">
-                        <ion-icon name="trash-outline"></ion-icon>
-                      </ion-button>
-                    </ion-item>
-                  </ion-item-sliding>
-                  <ion-item *ngIf="notas.length === 0">
-                    <ion-label class="ion-text-center">
-                      No hay notas guardadas
-                    </ion-label>
-                  </ion-item>
-                </ion-list>
-              </div>
+              <ion-button expand="block" (click)="enviarCorreo()">
+                <ion-icon name="paper-plane-outline"></ion-icon> Enviar Correo
+              </ion-button>
             </ion-card-content>
           </ion-card>
 
@@ -244,6 +213,7 @@
     </ion-grid>
   </div>
 </ion-content>
+
 
 <ion-footer>
   <ion-toolbar>
