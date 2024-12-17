@@ -14,17 +14,6 @@
         <ion-label position="floating">Nombre de Usuario</ion-label>
         <ion-input [(ngModel)]="usuario" type="text" readonly></ion-input>
       </ion-item>
-
-      <ion-item class="profile-item">
-        <ion-label position="floating">Correo Electrónico</ion-label>
-        <ion-input [(ngModel)]="email" type="email"></ion-input>
-      </ion-item>
-
-      <ion-item class="profile-item">
-        <ion-label position="floating"></ion-label>
-        <ion-input [(ngModel)]="fechaNacimiento" type="date"></ion-input>
-      </ion-item>
-
       <ion-item class="profile-item">
         <ion-label position="floating">Contraseña Actual</ion-label>
         <ion-input [(ngModel)]="currentPassword" type="password"></ion-input>
@@ -47,9 +36,6 @@
           <ion-card-header>
             <ion-card-subtitle>*Requisitos Cambio contraseña*</ion-card-subtitle>
           </ion-card-header>
-          <ion-card-content>
-            El correo debe contener el símbolo a Arroba y ser válido. La contraseña actual debe ser la correcta y la nueva contraseña debe tener al menos 6 caracteres
-          </ion-card-content>
         </ion-card>
       </div>
     </div>

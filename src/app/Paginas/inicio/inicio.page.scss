@@ -5,15 +5,10 @@
   background-color: #ffffff;
   color: #333333;
   padding: 15px;
+  padding-bottom: 5%;
   transition: transform 0.3s, box-shadow 0.3s;
   border: 2px solid #d1d1d1;
 }
-
-ion-content {
-  --padding-top: -15%;
-  --padding-bottom: 0%;
-}
-
 .custom-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
@@ -148,11 +143,27 @@ ion-header {
   background: linear-gradient(135deg, #a17fe0, #8366cc);
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
-  padding: 12px;
-  height: 100px;
-  display: flex;
+  padding: 8px; /* Reducido para ajustar el tamaño */
+  height: 80px; /* Reducido */
+  display: block;
   align-items: center;
   text-align: center;
+  position: fixed;
+
+}
+ion-footer {
+  background: linear-gradient(135deg, #a17fe0, #8366cc);
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  padding: 8px; /* Reducido para ajustar el tamaño */
+  height: 80px; /* Reducido */
+  display: block;
+  align-items: center;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
 }
 
 ion-toolbar {
@@ -169,22 +180,15 @@ ion-button {
   color: white;
 }
 
-ion-footer {
-  background: linear-gradient(135deg, #a17fe0, #8366cc);
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
-  padding: 12px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  left: 0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 10;
+
+body.keyboard-open ion-footer {
+  transform: translateY(100%); /* Mueve el footer hacia abajo cuando se abre el teclado */
 }
 
+ion-content {
+  --padding-top: 20px; /* Ajuste del padding para evitar superposición */
+  --padding-bottom: 100px; /* Espacio adicional para el teclado */
+}
 ion-footer ion-toolbar {
   --background: transparent;
 }

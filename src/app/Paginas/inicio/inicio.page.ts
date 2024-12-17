@@ -5,7 +5,6 @@ import axios from 'axios';
 import { AlertController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
-
 interface Actividad {
   asignatura: string;
   descripcion: string;
@@ -31,9 +30,7 @@ interface Palabra {
 })
 export class InicioPage implements OnInit {
   photo: string | null = null; // Variable para almacenar la foto
-
-  selectedNotesAgendaSegment: string = 'agregar'; // valor por defecto
-
+  selectedNotesAgendaSegment: string = 'agregar'; // Valor por defecto
   notasAgendadas: any[] = [];
   nuevaNotaAgendada = { titulo: '', fecha: '', contenido: '' };
   nuevaAlerta = {
@@ -42,7 +39,6 @@ export class InicioPage implements OnInit {
     descripcion: ''
   };
   alertasPendientes: any[] = [];
-
   usuario: string = '';
   isExpandedMap: { [key: string]: boolean } = {
     consulta: false,
@@ -113,6 +109,7 @@ export class InicioPage implements OnInit {
   ionViewWillEnter() {
     this.loadUsuarioFromStorage();
   }
+
   guardarNotaAgendada() {
     if (this.nuevaNotaAgendada.titulo && this.nuevaNotaAgendada.fecha && this.nuevaNotaAgendada.contenido) {
       this.notasAgendadas.push({ ...this.nuevaNotaAgendada });
@@ -123,7 +120,6 @@ export class InicioPage implements OnInit {
     }
   }
   
-  // Método para eliminar una nota agendada
   eliminarNotaAgendada(index: number) {
     this.notasAgendadas.splice(index, 1);
   }
@@ -215,17 +211,16 @@ export class InicioPage implements OnInit {
 
   async enviarCorreo() {
     if (this.correo.destinatario && this.correo.asunto && this.correo.contenido) {
-      // Lógica para enviar correo, por ejemplo, usando un servicio de backend o un API externa.
       console.log("Enviando correo a:", this.correo.destinatario);
       console.log("Asunto:", this.correo.asunto);
       console.log("Contenido:", this.correo.contenido);
 
-      // Al finalizar, puedes mostrar un mensaje de éxito
       await this.mostrarToast('Correo enviado exitosamente.');
     } else {
       await this.mostrarToast('Por favor, complete todos los campos.');
     }
   }
+
   async buscarPalabras() {
     const palabraTrimmed = this.palabraBuscada.trim();
   
@@ -312,6 +307,7 @@ export class InicioPage implements OnInit {
   eliminarAlerta(index: number) {
     this.alertasPendientes.splice(index, 1);
   }
+
   async capturePhoto() {
     const image = await Camera.getPhoto({
       quality: 90,
@@ -320,7 +316,6 @@ export class InicioPage implements OnInit {
       source: CameraSource.Prompt,
     });
 
-    this.photo = image.dataUrl ?? null; // Guarda la foto en formato Base64
-    console.log('Foto capturada:', this.photo);
+    this.photo = image.dataUrl ?? null; // Store the photo URL
   }
 }
