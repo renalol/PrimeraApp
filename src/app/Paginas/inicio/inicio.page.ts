@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
 import axios from 'axios';
 import { AlertController } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
 
 interface Actividad {
   asignatura: string;
@@ -28,6 +30,8 @@ interface Palabra {
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
+  photo: string | null = null; // Variable para almacenar la foto
+
   selectedNotesAgendaSegment: string = 'agregar'; // valor por defecto
 
   notasAgendadas: any[] = [];
@@ -307,5 +311,16 @@ export class InicioPage implements OnInit {
 
   eliminarAlerta(index: number) {
     this.alertasPendientes.splice(index, 1);
+  }
+  async capturePhoto() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Prompt,
+    });
+
+    this.photo = image.dataUrl ?? null; // Guarda la foto en formato Base64
+    console.log('Foto capturada:', this.photo);
   }
 }

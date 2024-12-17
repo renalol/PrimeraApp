@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Camera } from '@capacitor/camera';
+import { Keyboard } from '@capacitor/keyboard';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor() {}
+  
 }
+Keyboard.setResizeMode({ mode: 'body' as any }); // Forzar el tipo
+
+async function requestCameraPermissions() {
+  const status = await Camera.requestPermissions();
+  console.log('Permiso para la cámara:', status);
+}
+requestCameraPermissions();
+

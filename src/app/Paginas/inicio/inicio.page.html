@@ -201,6 +201,10 @@
                 <ion-label position="floating">Contenido</ion-label>
                 <ion-textarea [(ngModel)]="correo.contenido"></ion-textarea>
               </ion-item>
+              <ion-item>
+                <ion-button expand="full" (click)="capturePhoto()">Tomar o Subir Foto</ion-button>
+                <img *ngIf="photo" [src]="photo" alt="Foto subida" />
+              </ion-item>
 
               <ion-button expand="block" (click)="enviarCorreo()">
                 <ion-icon name="paper-plane-outline"></ion-icon> Enviar Correo

@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class DbService {
   private _storage: Storage | null = null;
+  private photo: string | null = null;
 
   constructor(private storage: Storage) {
     this.init();
@@ -27,5 +28,11 @@ export class DbService {
 
     // Comparación exacta, sin espacios en blanco adicionales
     return storedUser === usuario && storedPassword === contrasena;
+  }
+  async savePhoto() {
+    if (this.photo) {
+      await this.storage.set('user_photo', this.photo);
+      console.log('Foto guardada en almacenamiento local.');
+    }
   }
 }
