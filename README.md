@@ -1,5 +1,7 @@
-# MyAppMovil
-Primera app movil
+CLASSMINDER
+
+DEPENDENCIAS:
+
 npm install axios
 npm install @ionic/angular
 npm install @angular/forms
