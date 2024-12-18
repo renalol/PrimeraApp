@@ -1,10 +1,4 @@
-<ion-content [fullscreen]="true" class="fondoinicio">
-  <ion-footer>
-    <ion-toolbar class="footer">
-      <ion-title id="tPrincipal" style="position: relative">Duocuc: Sede Alameda</ion-title>
-    </ion-toolbar>
-  </ion-footer>
-
+<ion-content [fullscreen]="true" class="fondoinicio" >
   <div>
     <h2 class="profile-title" style="font-weight: bold">Perfil Usuario</h2>
   </div>
@@ -14,6 +8,7 @@
         <ion-label position="floating">Nombre de Usuario</ion-label>
         <ion-input [(ngModel)]="usuario" type="text" readonly></ion-input>
       </ion-item>
+
       <ion-item class="profile-item">
         <ion-label position="floating">Contraseña Actual</ion-label>
         <ion-input [(ngModel)]="currentPassword" type="password"></ion-input>
@@ -23,20 +18,12 @@
         <ion-label position="floating"></ion-label>
         <ion-input [(ngModel)]="password" type="password" placeholder="Nueva Contraseña (Opcional)"></ion-input>
       </ion-item>
-      
-
-      
 
       <div class="button-container">
-        <ion-button expand="block" (click)="saveProfile()">
+        <ion-button expand="block" fill="clear" (click)="saveProfile()">
           <ion-icon name="save-outline" slot="start"></ion-icon>
           Guardar Cambios
         </ion-button>
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>*Requisitos Cambio contraseña*</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
       </div>
     </div>
   </div>

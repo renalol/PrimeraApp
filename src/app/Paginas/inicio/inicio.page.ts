@@ -235,7 +235,7 @@ export class InicioPage implements OnInit {
       const response = await axios.get<Palabra[]>(`https://api.datamuse.com/words`, {
         params: {
           ml: palabraTrimmed,
-          max: 10
+          max: 6
         }
       });
 

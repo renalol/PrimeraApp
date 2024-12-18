@@ -12,10 +12,6 @@ export class PerfilPage implements OnInit {
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef | undefined;
 
   usuario: string = '';
-  email: string = '';
-  phone: string = '';
-  rut: string = '';
-  fechaNacimiento: string = '';
   password: string = ''; // Nueva contraseña
   currentPassword: string = ''; // Contraseña actual
   profileImageSrc: string | null = null;
@@ -62,10 +58,6 @@ export class PerfilPage implements OnInit {
   }
 
   loadProfileData() {
-    this.email = localStorage.getItem('userEmail') || '';
-    this.phone = localStorage.getItem('userPhone') || '';
-    this.rut = localStorage.getItem('userRut') || '';
-    this.fechaNacimiento = localStorage.getItem('userBirthDate') || '';
 
     const storedImage = localStorage.getItem('userProfileImage');
     if (storedImage) {
@@ -93,11 +85,6 @@ export class PerfilPage implements OnInit {
       localStorage.setItem('loginPassword', this.password);
     }
 
-    localStorage.setItem('userEmail', this.email);
-    localStorage.setItem('userPhone', this.phone);
-    localStorage.setItem('userRut', this.rut);
-    localStorage.setItem('userBirthDate', this.fechaNacimiento);
-
     this.presentToast('Perfil actualizado correctamente', 'success');
 
     this.password = '';
@@ -105,11 +92,6 @@ export class PerfilPage implements OnInit {
   }
 
   validateInputs(): boolean {
-    if (!this.email || !this.email.includes('@')) {
-      this.presentToast('Ingrese un correo electrónico válido', 'danger');
-      return false;
-    }
-
     if (this.password && this.password.length < 6) {
       this.presentToast('La contraseña debe tener al menos 6 caracteres', 'danger');
       return false;
@@ -145,4 +127,5 @@ export class PerfilPage implements OnInit {
       this.animation.play();
     }
   }
+  
 }

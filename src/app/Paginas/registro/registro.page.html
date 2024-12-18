@@ -2,22 +2,45 @@
   <img src="assets/imgs/Logo.class.png" alt="Class Minder" class="login-logo" />
   <h2 class="login-title" style="font-weight: bold">Registro de usuario</h2>
 
-
   <ion-item class="regis-item">
     <ion-label position="floating">Nombre de usuario</ion-label>
-    <ion-input type="text" [clearInput]="true" [(ngModel)]="nuevoUsuario"></ion-input>
+    <ion-input 
+      type="text" 
+      [clearInput]="true" 
+      [(ngModel)]="nuevoUsuario">
+    </ion-input>
   </ion-item>
-
+  
   <ion-item class="regis-item">
     <ion-label position="floating">Contraseña</ion-label>
-    <ion-input [clearInput]="true" [(ngModel)]="nuevaContrasena"
-      type="password"
-    ></ion-input>
+    <ion-input 
+      [clearInput]="true" 
+      [(ngModel)]="nuevaContrasena"
+      type="password">
+    </ion-input>
   </ion-item>
+  
+  <ion-item class="regis-item">
+    <ion-label position="floating">Confirmar Contraseña</ion-label>
+    <ion-input 
+      [clearInput]="true" 
+      [(ngModel)]="confirmarContrasena"
+      type="password">
+    </ion-input>
+  </ion-item>
+  
 
   <ion-button expand="block" fill="clear" (click)="registrarUsuario()">Registrar</ion-button>
-  <ion-button class="boton-reset" expand="block" fill="clear" routerLink="/login">Volver a la página principal</ion-button>
+  <ion-button 
+    class="boton-reset" 
+    expand="block" 
+    fill="clear" 
+    routerLink="/login"
+  >
+    Volver a la página principal
+  </ion-button>
 </ion-content>
+
 <ion-footer>
   <ion-toolbar class="footer">
     <ion-title id="tPrincipal" style="position: relative">Duocuc: Sede Alameda</ion-title>

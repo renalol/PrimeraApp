@@ -1,11 +1,14 @@
 .fondoinicio {
-
   display: flex;
   flex-direction: column; /* Asegura que el título y el contenido estén alineados verticalmente */
   justify-content: center; /* Centra todo verticalmente */
   align-items: center;
   height: 100%;
   --ion-background-color: #faf9f8;
+}
+.login-logo {
+  width: 45%;
+  margin: 30px 80px;
 }
 
 .profile-title {
@@ -26,7 +29,7 @@
   flex-grow: 1; /* Permite que el contenedor ocupe todo el espacio disponible */
 }
 ion-content {
-  padding-top: 10%;
+  padding-top: 40%;
 }
 ion-footer {
   background: linear-gradient(135deg, #a17fe0, #8366cc);
